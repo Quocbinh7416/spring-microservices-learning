@@ -10,4 +10,10 @@ Green-learner
     - Write endpoints
     - Integration with MongoDB
     - Lombok & codota
-    - Data validation
+    - Data validation: @Valid, @NotNull, @NotBlank, @Min, @Max
+    - Custom Exception Handler: @ControllerAdvice, @ExceptionHandler
+    - Hot code swapping: spring boot devtools & autoGenerate ID(mongoDB + String)
+    - Working on Configuration
+        + @Configuration, @ConfigurationProperties(prefix="")
+        + Modify yaml without fix code(fix .jar file)
+    - Profile in Microservices
