@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -22,7 +23,7 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    ResponseEntity<Product> addProduct(@RequestBody Product product){
+    ResponseEntity<Product> addProduct(@Valid @RequestBody Product product){
         String status = productService.addProduct(product);
         log.info("Product add status - {}", status);
 
@@ -40,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    Product productById(@PathVariable Integer id){
+    Product productById(@PathVariable String id){
         return productService.productById(id);
     }
 
@@ -51,7 +52,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/product/{id}")
-    String deleteProductById(@PathVariable Integer id){
+    String deleteProductById(@PathVariable String id){
         return productService.deleteProductById(id);
     }
 }

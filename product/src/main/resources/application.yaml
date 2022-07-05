@@ -1,3 +1,6 @@
+server:
+  port: 9091
+
 spring:
   application:
     name: Product Microservices
@@ -6,6 +9,22 @@ spring:
       host: localhost
       port: 27017
       database: shopping
+  profiles:
+    active: dev, prod
 
+product:
+  currencies:
+    - VND
+    - USD
+    - EUR
+
+---
 server:
-  port: 9091
+  port: 9094
+
+spring:
+  config:
+    activate:
+      on-profile:
+        - prod
+
