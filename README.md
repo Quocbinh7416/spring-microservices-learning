@@ -28,5 +28,8 @@ Green-learner
     2. How to change log level at run-time
     3. How to register Multiple Instances with SBA Server
     4. Notification when app status changes in SBA Server
-    5. Data persistence & Clustering with Hazelcast in SBA Serer
+    5. Data persistence & Clustering with Hazelcast in SBA Serer [Doc](https://codecentric.github.io/spring-boot-admin/)
+    6. Customize user interface of SBA Server
+    7. Review
+13. Circuit Breaker in Product Microservices
     

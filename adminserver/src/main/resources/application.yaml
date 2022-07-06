@@ -10,6 +10,16 @@ spring:
     test-connection: true
   boot:
     admin:
+      ui:
+        brand: "<img scr='assets/img/logo.png'><span>BQN</span>"
+        title: 'BQN Learning'
+        login-icon: 'assets/img/logo.png'
+        available-languages:
+          - en
+          - fr
+        view-settings:
+          - name: 'about'
+            enabled: false
       notify:
         mail:
           to:
