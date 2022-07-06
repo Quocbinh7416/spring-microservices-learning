@@ -7,14 +7,17 @@ Green-learner
 
 ## Start day: Tue 05/07/2022
 ### Product service
-1. Write endpoints
-2. Integration with MongoDB
-3. Lombok & codota
-4. Data validation: @Valid, @NotNull, @NotBlank, @Min, @Max
-5. Custom Exception Handler: @ControllerAdvice, @ExceptionHandler
-6. Hot code swapping: spring boot devtools & autoGenerate ID(mongoDB + String)
-7. Working on Configuration
+1. Understanding Architecture & Technologies
+2. Write endpoints
+3. Integration with MongoDB
+4. Lombok & codota
+5. Data validation: @Valid, @NotNull, @NotBlank, @Min, @Max
+6. Custom Exception Handler: @ControllerAdvice, @ExceptionHandler
+7. Hot code swapping: spring boot devtools & autoGenerate ID(mongoDB + String)
+8. Working on Configuration
    - @Configuration, @ConfigurationProperties(prefix="")
    - Modify yaml without fix code(fix .jar file)
-8. Profile in Microservices
-9. Blank
+9. Profile in Microservices (branch 05072022)
+10. 
+    1. Centralized Logging of All the Endpoints
+    2. Filtering Request
