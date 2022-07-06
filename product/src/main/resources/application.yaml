@@ -9,8 +9,18 @@ spring:
       host: localhost
       port: 27017
       database: shopping
-#  profiles:
-#    active: dev, prod
+  profiles:
+    active: local
+
+logging:
+  file:
+    name: d:\logs\product.log
+  logback:
+    rollingpolicy:
+      max-file-size: 50KB
+#  level:
+#    root: TRACE
+#    path: d:\logs #spring.log
 
 product:
   currencies:

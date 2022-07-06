@@ -21,3 +21,5 @@ Green-learner
 10. 
     1. Centralized Logging of All the Endpoints
     2. Filtering Request & Masking data Before Logging
+    3. Log configuration [Spring document](https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html)
+11. Spring Actual
