@@ -23,3 +23,10 @@ Green-learner
     2. Filtering Request & Masking data Before Logging
     3. Log configuration [Spring document](https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html)
 11. Spring Actuator
+12. Sample
+    1. Setting up Spring admin server and client
+    2. How to change log level at run-time
+    3. How to register Multiple Instances with SBA Server
+    4. Notification when app status changes in SBA Server
+    5. Data persistence & Clustering with Hazelcast in SBA Serer
+    

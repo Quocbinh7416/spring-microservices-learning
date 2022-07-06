@@ -11,16 +11,21 @@ spring:
       database: shopping
   profiles:
     active: local
+  boot:
+    admin:
+      client:
+        url:
+          - http://localhost:8081
 
 logging:
   file:
     name: d:\logs\product.log
+#    path: d:\logs #spring.log
   logback:
     rollingpolicy:
-      max-file-size: 50KB
-#  level:
-#    root: INFO
-#    path: d:\logs #spring.log
+      max-file-size: 10MB
+  level:
+    root: INFO
 
 # actuator specific
 management:

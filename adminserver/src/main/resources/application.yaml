@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  mail:
+    host: smtp.mailtrap.io
+    port: 2525
+    username: 618764dff1d7d4
+    password: 577668734abdfe
+    test-connection: true
+  boot:
+    admin:
+      notify:
+        mail:
+          to:
+            - quocbinh0612@gmail.com

@@ -15,5 +15,6 @@
 
     <modules>
         <module>product</module>
+        <module>adminserver</module>
     </modules>
 </project>
