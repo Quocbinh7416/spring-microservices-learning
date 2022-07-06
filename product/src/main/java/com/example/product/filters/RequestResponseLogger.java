@@ -1,8 +1,11 @@
 package com.example.product.filters;
 
+import com.example.product.dto.Product;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.TeeOutputStream;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -15,27 +18,44 @@ import java.io.*;
 
 @Component
 @Slf4j
-@Order(1)
+//@Order(1)
 public class RequestResponseLogger implements Filter {
+    private final ObjectMapper objectMapper;
+
+    public RequestResponseLogger(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         MyCustomHttpRequestWrapper requestWrapper = new MyCustomHttpRequestWrapper((HttpServletRequest) servletRequest);
-        log.info("Request URI: {}", requestWrapper.getRequestURI());
+        String requestData = new String(requestWrapper.getByteArray()).replaceAll("\n", " ");
+        String uri = requestWrapper.getRequestURI();
+        if("/v1/addProduct".equalsIgnoreCase(uri)){
+            Product product = objectMapper.readValue(requestData, Product.class);
+            product.setCurrency("****");
+            requestData = objectMapper.writeValueAsString(product);
+        }
+        log.info("Request URI: {}", uri);
         log.info("Request Method: {}", requestWrapper.getMethod());
-        log.info("Request Body: {}", new String(requestWrapper.getByteArray()).replaceAll("\n", " "));
+        log.info("Request Body: {}", requestData);
 
         MyCustomHttpResponseWrapper responseWrapper = new MyCustomHttpResponseWrapper((HttpServletResponse) servletResponse);
 
         filterChain.doFilter(requestWrapper, responseWrapper);
 
+        String responseResult = responseWrapper.getByteArrayOutputStream().toString();
+        if("/v1/addProduct".equalsIgnoreCase(uri)){
+            Product product = objectMapper.readValue(responseResult, Product.class);
+            product.setCurrency("****");
+            responseResult = objectMapper.writeValueAsString(product);
+        }
         log.info("Response status - {}", responseWrapper.getStatus());
-        log.info("Response body - {}", new String(responseWrapper.getByteArrayOutputStream().toByteArray()));
-
-        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+        log.info("Response body - {}", responseResult);
     }
 
-    private class MyCustomHttpRequestWrapper extends HttpServletRequestWrapper {
-        private byte[] byteArray;
+    private static class MyCustomHttpRequestWrapper extends HttpServletRequestWrapper {
+        private final byte[] byteArray;
 
         public MyCustomHttpRequestWrapper(HttpServletRequest request) {
             super(request);
@@ -47,7 +67,7 @@ public class RequestResponseLogger implements Filter {
         }
 
         @Override
-        public ServletInputStream getInputStream() throws IOException {
+        public ServletInputStream getInputStream() {
             return new MyDelegatingServletInputStream(new ByteArrayInputStream(byteArray));
         }
 
@@ -56,9 +76,9 @@ public class RequestResponseLogger implements Filter {
         }
     }
 
-    private class MyCustomHttpResponseWrapper extends HttpServletResponseWrapper {
-        private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        private PrintStream printStream = new PrintStream(byteArrayOutputStream);
+    private static class MyCustomHttpResponseWrapper extends HttpServletResponseWrapper {
+        private final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        private final PrintStream printStream = new PrintStream(byteArrayOutputStream);
 
         public ByteArrayOutputStream getByteArrayOutputStream() {
             return byteArrayOutputStream;
