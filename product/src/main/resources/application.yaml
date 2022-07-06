@@ -19,14 +19,37 @@ logging:
     rollingpolicy:
       max-file-size: 50KB
 #  level:
-#    root: TRACE
+#    root: INFO
 #    path: d:\logs #spring.log
+
+# actuator specific
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - '*'
+  endpoint:
+    health:
+      show-details: always
+  health:
+    mongo:
+      enabled: true
+  info:
+    env:
+      enabled: true
 
 product:
   currencies:
     - VND
     - USD
     - EUR
+
+info:
+  app:
+    name: Product Microservices
+    version: 1.0
+    description: Add and retrieve product information
 
 ---
 server:
