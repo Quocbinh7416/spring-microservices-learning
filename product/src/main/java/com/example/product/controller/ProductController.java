@@ -32,7 +32,10 @@ public class ProductController {
 
     @GetMapping("/productList")
     List<Product> productList(){
-        return productService.listAllProducts();
+        log.info("Listing product");
+        List<Product> productList = productService.listAllProducts();
+        log.info("All product return - {}", productList);
+        return productList;
     }
 
     @GetMapping("/productList/{category}")
